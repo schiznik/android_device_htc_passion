@@ -20,11 +20,9 @@
 #
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-# This is where we'd set a backup provider if we had one
-#$(call inherit-product, device/sample/products/backup_overlay.mk)
-$(call inherit-product, device/htc/passion/passion_us.mk)
+$(call inherit-product, device/common/gps/gps_eu_supl.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
+$(call inherit-product, device/htc/passion/passion.mk)
 
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := full_passion

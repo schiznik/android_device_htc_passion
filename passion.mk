@@ -29,7 +29,9 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.sf.lcd_density=240 \
     rild.libpath=/system/lib/libhtc_ril.so \
     wifi.interface=eth0 \
-    wifi.supplicant_scan_interval=15
+    wifi.supplicant_scan_interval=15 \
+    ro.ril.hsxpa=2 \
+    ro.ril.gprsclass=12
 
 # Default network type.
 # 0 => WCDMA preferred.
@@ -49,5 +51,63 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ## (2) Also get non-open-source GSM-specific aspects if available
 $(call inherit-product-if-exists, vendor/htc/passion/passion-vendor.mk)
 
-## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
-$(call inherit-product, device/htc/passion-common/passion.mk)
+PRODUCT_PROPERTY_OVERRIDES :=
+    ro.media.dec.jpeg.memcap=20000000
+
+DEVICE_PACKAGE_OVERLAYS := device/htc/passion/overlay
+
+PRODUCT_COPY_FILES := \
+    frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+    frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+    frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
+    frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+
+# media config xml file
+PRODUCT_COPY_FILES += \
+    device/htc/passion/media_profiles.xml:system/etc/media_profiles.xml
+
+PRODUCT_PACKAGES := \
+    sensors.mahimahi \
+    lights.mahimahi \
+    gralloc.qsd8k \
+    librs_jni \
+    com.android.future.usb.accessory
+
+# we have enough storage space to hold precise GC data
+PRODUCT_TAGS += dalvik.gc.type-precise
+
+# Passion uses high-density artwork where available
+PRODUCT_LOCALES := hdpi
+
+PRODUCT_COPY_FILES += \
+    device/htc/passion/mahimahi-keypad.kl:system/usr/keylayout/mahimahi-keypad.kl \
+    device/htc/passion/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
+    device/htc/passion/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
+    device/htc/passion/vold.fstab:system/etc/vold.fstab
+
+
+PRODUCT_COPY_FILES += \
+    device/htc/passion/bcm4329.ko:system/lib/modules/bcm4329.ko
+
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+LOCAL_KERNEL := device/htc/passion/kernel
+else
+LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel
+
+$(call inherit-product-if-exists, vendor/htc/passion/passion-vendor.mk)
+
+# media profiles and capabilities spec
+$(call inherit-product, device/htc/passion/media_a1026.mk)
+
+# stuff common to all HTC phones
+$(call inherit-product, device/htc/common/common.mk)

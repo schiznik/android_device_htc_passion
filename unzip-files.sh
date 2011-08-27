@@ -22,10 +22,6 @@ MANUFACTURER=htc
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/akmd -d ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 chmod 755 ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/akmd
-unzip -j -o ../../../${DEVICE}_update.zip system/bin/mm-venc-omx-test -d ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
-chmod 755 ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/mm-venc-omx-test
-unzip -j -o ../../../${DEVICE}_update.zip system/bin/parse_radio_log -d ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
-chmod 755 ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/parse_radio_log
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/AdieHWCodecSetting.csv -d ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/AudioBTID.csv -d ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/firmware/bcm4329.hcd -d ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
@@ -73,8 +69,6 @@ PRODUCT_COPY_FILES := \\
 # All the blobs necessary for passion
 PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/akmd:system/bin/akmd \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/mm-venc-omx-test:system/bin/mm-venc-omx-test \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/parse_radio_log:system/bin/parse_radio_log \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/AdieHWCodecSetting.csv:system/etc/AdieHWCodecSetting.csv \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/AudioBTID.csv:system/etc/AudioBTID.csv \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/bcm4329.hcd:system/etc/firmware/bcm4329.hcd \\

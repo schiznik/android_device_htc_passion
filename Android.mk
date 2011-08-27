@@ -1,4 +1,3 @@
-#
 # Copyright (C) 2009 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,15 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-#
-# This is the device-specific product configuration for passion,
-# configured with Asia-specific settings.
-#
+LOCAL_PATH := $(my-dir)
+subdir_makefiles := \
+	$(LOCAL_PATH)/libsensors/Android.mk \
+	$(LOCAL_PATH)/liblights/Android.mk
 
-# The gps config appropriate for this device
-$(call inherit-product, device/common/gps/gps_as_supl.mk)
-
-# The rest of the configuration is inherited from a generic config
-$(call inherit-product, device/htc/passion/passion.mk)
+include $(subdir_makefiles)

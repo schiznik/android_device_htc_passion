@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2009 The Android Open Source Project
+# Copyright (C) 2008 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,15 +11,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-#
-# This is the device-specific product configuration for passion,
-# configured with US-specific settings.
-#
+LOCAL_PATH:= $(call my-dir)
 
-# The gps config appropriate for this device
-$(call inherit-product, device/common/gps/gps_us_supl.mk)
+ifneq ($(TARGET_SIMULATOR),true)
 
-# The rest of the configuration is inherited from a generic config
-$(call inherit-product, device/htc/passion/passion.mk)
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := lights.mahimahi
+
+LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
+
+LOCAL_MODULE_TAGS := optional
+
+LOCAL_SRC_FILES := lights.c
+LOCAL_SHARED_LIBRARIES := liblog
+LOCAL_PRELINK_MODULE := false
+
+include $(BUILD_SHARED_LIBRARY)
+
+endif # !TARGET_SIMULATOR

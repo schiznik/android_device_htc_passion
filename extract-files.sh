@@ -22,10 +22,6 @@ MANUFACTURER=htc
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 adb pull /system/bin/akmd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/akmd
 chmod 755 ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/akmd
-adb pull /system/bin/mm-venc-omx-test ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/mm-venc-omx-test
-chmod 755 ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/mm-venc-omx-test
-adb pull /system/bin/parse_radio_log ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/parse_radio_log
-chmod 755 ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/parse_radio_log
 adb pull /system/etc/AdieHWCodecSetting.csv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/AdieHWCodecSetting.csv
 adb pull /system/etc/AudioBTID.csv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/AudioBTID.csv
 adb pull /system/etc/firmware/bcm4329.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bcm4329.hcd
@@ -73,8 +69,6 @@ PRODUCT_COPY_FILES := \\
 # All the blobs necessary for passion
 PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/akmd:system/bin/akmd \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/mm-venc-omx-test:system/bin/mm-venc-omx-test \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/parse_radio_log:system/bin/parse_radio_log \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/AdieHWCodecSetting.csv:system/etc/AdieHWCodecSetting.csv \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/AudioBTID.csv:system/etc/AudioBTID.csv \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/bcm4329.hcd:system/etc/firmware/bcm4329.hcd \\
