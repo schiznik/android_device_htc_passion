@@ -21,11 +21,11 @@
 
 ## (1) First, the most specific values, i.e. the aspects that are specific to GSM
 
-PRODUCT_COPY_FILES := \
+PRODUCT_COPY_FILES += \
     device/htc/passion/init.mahimahi.rc:root/init.mahimahi.rc \
     device/htc/passion/ueventd.mahimahi.rc:root/ueventd.mahimahi.rc
 
-PRODUCT_PROPERTY_OVERRIDES := \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
     rild.libpath=/system/lib/libhtc_ril.so \
     wifi.interface=eth0 \
@@ -51,12 +51,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ## (2) Also get non-open-source GSM-specific aspects if available
 $(call inherit-product-if-exists, vendor/htc/passion/passion-vendor.mk)
 
-PRODUCT_PROPERTY_OVERRIDES :=
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=20000000
 
-DEVICE_PACKAGE_OVERLAYS := device/htc/passion/overlay
+DEVICE_PACKAGE_OVERLAYS += device/htc/passion/overlay
 
-PRODUCT_COPY_FILES := \
+PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
@@ -72,7 +72,7 @@ PRODUCT_COPY_FILES := \
 PRODUCT_COPY_FILES += \
     device/htc/passion/media_profiles.xml:system/etc/media_profiles.xml
 
-PRODUCT_PACKAGES := \
+PRODUCT_PACKAGES += \
     sensors.mahimahi \
     lights.mahimahi \
     gralloc.qsd8k \
